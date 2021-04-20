@@ -10,14 +10,14 @@ script:
   - docker run -e CI=true cellokrecik/react-test npm test
 
 after_success:
-  - docker build -t cellokrecik/multi-client ./client
-  - docker build -t cellokrecik/multi-nginx ./nginx
-  - docker build -t cellokrecik/multi-server ./server
-  - docker build -t cellokrecik/multi-worker ./worker
-  - echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_ID)" --password-stdin  
-  - docker push cellokrecik/multi-client
-  - docker push cellokrecik/multi-nginx
-  - docker push cellokrecik/multi-server
-  - docker push cellokrecik/multi-worker
+  - docker build -t cellokrecik/multi-client:latest ./client
+  - docker build -t cellokrecik/multi-nginx:latest ./nginx
+  - docker build -t cellokrecik/multi-server:latest ./server
+  - docker build -t cellokrecik/multi-worker:latest ./worker
+  - docker login -u "$(DOCKER_ID)"   -p "$(DOCKER_PASSWORD)"  docker.io  
+  - docker push cellokrecik/multi-client:latest
+  - docker push cellokrecik/multi-nginx:latest
+  - docker push cellokrecik/multi-server:latest
+  - docker push cellokrecik/multi-worker:latest
 
 
