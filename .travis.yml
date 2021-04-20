@@ -14,9 +14,7 @@ after_success:
   - docker build -t emiliatraczyk/multi-nginx ./nginx
   - docker build -t emiliatraczyk/multi-server ./server
   - docker build -t emiliatraczyk/multi-worker ./worker
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_ID -p $DOCKER_PASSWORD;
-      make push-image;
+  - echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_ID)" --password-stdin  
   - docker push emiliatraczyk/multi-client
   - docker push emiliatraczyk/multi-nginx
   - docker push emiliatraczyk/multi-server
