@@ -14,7 +14,7 @@ after_success:
   - docker build -t cellokrecik/multi-nginx:latest ./nginx
   - docker build -t cellokrecik/multi-server:latest ./server
   - docker build -t cellokrecik/multi-worker:latest ./worker
-  - docker login -u "$(DOCKER_ID)"   -p "$(DOCKER_PASSWORD)"  docker.io  
+  - echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_ID)" docker.io --password-stdin    
   - docker push cellokrecik/multi-client:latest
   - docker push cellokrecik/multi-nginx:latest
   - docker push cellokrecik/multi-server:latest
