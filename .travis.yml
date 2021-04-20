@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t emiliatraczyk/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t cellokrecik/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true emiliatraczyk/react-test npm test
+  - docker run -e CI=true cellokrecik/react-test npm test
 
 after_success:
-  - docker build -t emiliatraczyk/multi-client ./client
-  - docker build -t emiliatraczyk/multi-nginx ./nginx
-  - docker build -t emiliatraczyk/multi-server ./server
-  - docker build -t emiliatraczyk/multi-worker ./worker
+  - docker build -t cellokrecik/multi-client ./client
+  - docker build -t cellokrecik/multi-nginx ./nginx
+  - docker build -t cellokrecik/multi-server ./server
+  - docker build -t cellokrecik/multi-worker ./worker
   - echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_ID)" --password-stdin  
-  - docker push emiliatraczyk/multi-client
-  - docker push emiliatraczyk/multi-nginx
-  - docker push emiliatraczyk/multi-server
-  - docker push emiliatraczyk/multi-worker
+  - docker push cellokrecik/multi-client
+  - docker push cellokrecik/multi-nginx
+  - docker push cellokrecik/multi-server
+  - docker push cellokrecik/multi-worker
 
 
